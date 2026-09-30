@@ -1,0 +1,90 @@
+From: credit-policy-office@aeoncredit-workshop.example
+To: all-branches-underwriting@aeoncredit-workshop.example
+Subject:
+ [CIR-06] Early settlement rebate computation reminder (Effective 2026-06-01)
+Date:
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Illustrative document for workshop use. Not an AEON Credit policy.
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Circular ID: CIR-06 | Version: 1.0 | Effective: 2026-06-01 | Access: internal
+
+Internal Operational Circular CIR-2026-012 (CIR-06) issued by AEON Credit Ser=
+vice (M) Berhad, providing operational guidance and mandatory computational p=
+rocedures for granting Ibra' (rebate) on early settlement of Personal Financi=
+ng-i (Tawarruq) accounts pursuant to Bank Negara Malaysia (BNM) guidelines, e=
+ffective 1 June 2026.
+
+1.0 - Purpose and Background
+This Circular (CIR-2026-012 / CIR-06) serves as an operational reminder to al=
+l retail financing operations, credit operations, and branch customer service=
+ personnel regarding the standardized calculation of Ibra' (rebate) for custo=
+mers undertaking early settlement of Personal Financing-i (Tawarruq). In comp=
+liance with Bank Negara Malaysia (BNM) Guidelines on Ibra' (Rebate) for Islam=
+ic Banking Products, AEON Credit Service (M) Berhad ('the Company') is commit=
+ted to ensuring full transparency, Shariah compliance, and computational prec=
+ision across all settlement quotation notices.
+
+2.0 - Regulatory and Shariah Foundation of Ibra'
+Under the Shariah contract of Murabahah via Tawarruq arrangement adopted in t=
+he Company's Personal Financing-i facility, the sale price agreed at contract=
+ inception is fixed and legally binding. Ibra' refers to an act of releasing =
+rights, where the Company grants a discretionary rebate to the customer on un=
+earned contractual profit when the facility is settled prior to the contractu=
+al maturity date. Per BNM regulatory guidelines, granting Ibra' upon full ear=
+ly settlement or early redemption via refinancing is mandatory for licensed i=
+nstitutions and must reflect the unearned profit over the unexpired financing=
+ tenure.
+
+3.0 - Applicability and Facility Parameters
+This circular applies to all active Personal Financing-i (Tawarruq) accounts.=
+ For reference, the product offers financing amounts ranging from RM 3,000 to=
+ RM 150,000 with tenures spanning 12 to 84 months, under flat profit rates ra=
+nging from 6.88% p.a. to 14.88% p.a. flat. Early settlement calculations must=
+ encompass the entire remaining principal and earned profit up to the designa=
+ted settlement cut-off date, less the prescribed Ibra' sum.
+
+4.0 - Standardized Ibra' Computation Formula
+The net settlement sum payable by the customer shall be derived as follows: S=
+ettlement Amount =3D Outstanding Selling Price minus Ibra' plus Permitted Lat=
+e Payment Charges (Ta'widh) minus Advance Instalments Held in Suspense. The I=
+bra' amount represents the total unearned contractual profit computed on the =
+effective profit rate basis corresponding to the remaining unexpired financin=
+g tenure. Administrative charges or early settlement fees are strictly prohib=
+ited from being deducted against the rebate entitlement, ensuring full confor=
+mity with BNM consumer protection standards.
+
+5.0 - Worked Example: Settlement at Month 24 of 60-Month Facility
+Consider a Personal Financing-i facility with a principal amount of RM 50,000=
+.00 approved at a flat profit rate of 8.00% p.a. over a 60-month tenure. Tota=
+l contractual profit equals RM 20,000.00 (RM 50,000.00 x 8.00% x 5 years), yi=
+elding a Total Selling Price of RM 70,000.00 and an equated monthly instalmen=
+t of RM 1,166.67. If the customer requests early settlement at Month 24 after=
+ servicing 24 prompt instalments (cumulative instalments paid: RM 28,000.08),=
+ the gross outstanding selling price is RM 41,999.92. Applying the reducing b=
+alance amortisation schedule mandated by BNM, the earned profit over the init=
+ial 24 months is RM 10,845.20, leaving an unearned profit of RM 9,154.80. Con=
+sequently, Ibra' granted is RM 9,154.80, and the net settlement amount due is=
+ RM 32,845.12.
+
+6.0 - Operational Processing Timelines and Quotation Validity
+Branch and financing operations staff must generate early settlement redempti=
+on statements strictly through the core financing system (CFS-i). Settlement =
+statements are valid for fourteen (14) calendar days from the date of quotati=
+on. If settlement proceeds are not received within this validity window, a re=
+vised quotation reflecting updated accruals must be issued. System operators =
+must never manually adjust rebate amounts without signed authorization from t=
+he Head of Credit Operations.
+
+7.0 - Customer Inquiries and Dispute Escalation
+Customer inquiries or disputes regarding early settlement calculations must b=
+e handled in strict alignment with Company customer service standards. Staff =
+must formally acknowledge customer complaints within two (2) business days an=
+d ensure final resolution within fourteen (14) calendar days. Should a custom=
+er remain dissatisfied with the Ibra' determination, the matter must be escal=
+ated in writing to the Customer Care Department and, where unresolved, to the=
+ Ombudsman for Financial Services (OFS).

@@ -1,0 +1,11 @@
+[project]
+name = "acsm-rag-ingestion"
+version = "0.1.0"
+description = "Instructor-only idempotent RAG ingestion and corpus sync for ACSM workshop"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "google-genai>=1.0.0",
+    "google-cloud-bigquery>=3.25.0",
+    "google-cloud-storage>=2.14.0",
+    "google-cloud-aiplatform>=1.156.0",
+]

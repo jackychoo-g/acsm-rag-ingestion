@@ -1,0 +1,71 @@
+From: credit-policy-office@aeoncredit-workshop.example
+To: all-branches-underwriting@aeoncredit-workshop.example
+Subject:
+ [CIR-04] Update to CTOS retrieval fallback procedure (Effective 2026-03-02)
+Date:
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Illustrative document for workshop use. Not an AEON Credit policy.
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Circular ID: CIR-04 | Version: 1.0 | Effective: 2026-03-02 | Access: internal
+
+Circular CIR-2026-005 (Document ID: CIR-04) establishes the updated mandatory=
+ fallback procedure for retail financing applications when CTOS credit assess=
+ment reports cannot be retrieved. Under this directive, applications encounte=
+ring CTOS gateway downtime or retrieval errors must be placed in a system hol=
+d status and re-queried after 4 hours. Automated system declines driven by bu=
+reau unavailability or timeout are strictly prohibited.
+
+1.0 - Purpose and Background
+This Circular (CIR-2026-005) issues mandatory operational guidance regarding =
+CTOS credit bureau retrieval failures. Effective 2026-03-02, all automated de=
+cisioning engines and underwriting units within AEON Credit Service (M) Berha=
+d must strictly adhere to the standardized fallback protocols defined herein,=
+ superseding prior interim instructions.
+
+2.0 - Scope of Application
+This procedure governs all incoming retail credit and financing origination c=
+hannels across all products offered by the Company, including AEON Classic Vi=
+sa, AEON Gold Visa, AEON Platinum Visa, Personal Financing-i (Tawarruq), Moto=
+rcycle Hire Purchase-i, Auto Hire Purchase-i, and Product (Objective) Financi=
+ng.
+
+3.0 - Detection of CTOS Service Disruption and System Hold Status
+Upon encountering API timeout thresholds, connectivity disruptions, or bureau=
+ maintenance responses during automated underwriting, the origination platfor=
+m shall not terminate the application. The system must immediately assign the=
+ status 'PENDING_BUREAU_RETRY' and hold the application in a paused operation=
+al queue.
+
+4.0 - Mandatory 4-Hour Retry Protocol
+Applications placed on hold due to CTOS unavailability must undergo automated=
+ retrieval retry attempts at fixed 4-hour intervals from the timestamp of the=
+ initial failed query. The underwriting engine shall schedule subsequent poll=
+ing up to a maximum of 3 consecutive automated cycles before rerouting to man=
+ual queue processing.
+
+5.0 - Prohibition of Automated Adverse Action
+Under no circumstances shall the origination engine issue an automated reject=
+ion or decline notice to an applicant due to bureau connection timeouts, thir=
+d-party server errors, or incomplete CTOS data retrieval. Decisions must stri=
+ctly be based on retrieved risk indicators (such as CTOS scores, bankruptcy i=
+ndicators, legal action status, or active AKPK records) once successfully ret=
+rieved.
+
+6.0 - Escalation to Senior Underwriter Review
+If the CTOS system remains unreachable after the secondary retry cycle (8 hou=
+rs elapsed) or if persistent gateway faults are logged, the application file =
+must be escalated directly to a Senior Underwriter. The Senior Underwriter ma=
+y execute a secure web-portal retrieval, verify credit status via alternative=
+ authorized interfaces, or hold the file pending bureau recovery.
+
+7.0 - Customer Service and SLA Preservation
+Operational teams must manage customer communication proactively. Where appli=
+cants lodge status inquiries regarding held files, frontline teams must ackno=
+wledge receipt within 2 business days. Applications delayed past 24 hours mus=
+t be tracked under exception governance to avoid breach of standard turnaroun=
+d commitments.

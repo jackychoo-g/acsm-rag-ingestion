@@ -1,0 +1,48 @@
+doc_id,family,title,format,language,version,effective_date,access,moment,chunks,bytes,file_path
+POL-CR-001-v1,credit_policy,Credit Underwriting Policy (v1),pdf,en,1.0,2025-01-01,internal,1,22,9095,credit_policy/POL-CR-001-v1.pdf
+POL-CR-001-v2,credit_policy,Credit Underwriting Policy (v2),pdf,en,2.0,2026-01-01,internal,1,9,10544,credit_policy/POL-CR-001-v2.pdf
+POL-CR-001-v2-docx,credit_policy,"Credit Underwriting Policy (v2), editable copy",docx,en,2.0,2026-01-01,internal,1,9,41818,credit_policy/POL-CR-001-v2-docx.docx
+STD-CR-002,credit_policy,Income Verification Standard,docx,en,1.0,2026-01-01,internal,,9,40967,credit_policy/STD-CR-002.docx
+CIR-01,circular,Revision of NDI floor for applicants with dependants,pdf,en,1.0,2025-11-20,internal,1,8,6472,circular/CIR-01.pdf
+CIR-02,circular,Clarification on counting dependants,eml,en,1.0,2025-12-05,internal,1,8,4936,circular/CIR-02.eml
+CIR-03,circular,Temporary suspension of Platinum card annual fee waiver campaign,pdf,en,1.0,2026-02-10,internal,1,8,6457,circular/CIR-03.pdf
+CIR-04,circular,Update to CTOS retrieval fallback procedure,eml,en,1.0,2026-03-02,internal,1,8,3888,circular/CIR-04.eml
+CIR-05,circular,Motorcycle HP-i margin for e-motorcycles,pdf,en,1.0,2026-04-18,internal,1,8,6755,circular/CIR-05.pdf
+CIR-06,circular,Early settlement rebate computation reminder,eml,en,1.0,2026-06-01,internal,1,8,5484,circular/CIR-06.eml
+PDS-CARD-CLASSIC,product,Product Disclosure Sheet: AEON Classic Visa,pdf,en,1.0,2026-01-01,public,"2,3",9,7010,product/PDS-CARD-CLASSIC.pdf
+TNC-CARD-CLASSIC,product,Cardmember Terms and Conditions: AEON Classic Visa,html,en,1.0,2026-01-01,public,,9,8087,product/TNC-CARD-CLASSIC.html
+PDS-CARD-GOLD,product,Product Disclosure Sheet: AEON Gold Visa,pdf,en,1.0,2026-01-01,public,"2,3",9,7572,product/PDS-CARD-GOLD.pdf
+TNC-CARD-GOLD,product,Cardmember Terms and Conditions: AEON Gold Visa,html,en,1.0,2026-01-01,public,,9,6576,product/TNC-CARD-GOLD.html
+PDS-CARD-PLAT,product,Product Disclosure Sheet: AEON Platinum Visa,pdf,en,1.0,2026-01-01,public,"2,3",9,6402,product/PDS-CARD-PLAT.pdf
+TNC-CARD-PLAT,product,Cardmember Terms and Conditions: AEON Platinum Visa,html,en,1.0,2026-01-01,public,,9,6846,product/TNC-CARD-PLAT.html
+PDS-PF-I,product,Product Disclosure Sheet: Personal Financing-i,pdf,en,1.0,2026-01-01,public,3,9,7448,product/PDS-PF-I.pdf
+PDS-MHP-I,product,Product Disclosure Sheet: Motorcycle Hire Purchase-i,pdf,en,1.0,2026-01-01,public,3,10,7624,product/PDS-MHP-I.pdf
+PDS-AHP-I,product,Product Disclosure Sheet: Auto Hire Purchase-i,pdf,en,1.0,2026-01-01,public,3,9,6852,product/PDS-AHP-I.pdf
+PDS-PRODFIN,product,Product Disclosure Sheet: Product Financing,pdf,en,1.0,2026-01-01,public,3,9,6837,product/PDS-PRODFIN.pdf
+SHR-001,product,Shariah Concept Note: Tawarruq for Personal Financing-i,pdf,en,1.0,2026-01-01,internal,,9,6538,product/SHR-001.pdf
+FEE-001,fees,Schedule of Fees and Charges: Credit Cards,pdf,en,1.0,2026-03-01,public,"2,3",8,6531,fees/FEE-001.pdf
+FEE-002,fees,Rate Table: Personal Financing-i Profit Rates by Segment,xlsx,en,1.0,2026-01-01,internal,3,8,7021,fees/FEE-002.xlsx
+FEE-003,fees,Rate Table: Hire Purchase-i Margins and Rates,xlsx,en,1.0,2026-01-01,internal,3,8,7738,fees/FEE-003.xlsx
+SOP-OPS-001,sop,eKYC Onboarding Procedure,docx,en,1.0,2026-01-01,internal,6,9,41621,sop/SOP-OPS-001.docx
+SOP-OPS-002,sop,Card Transaction Dispute and Chargeback,docx,en,1.0,2026-01-01,internal,6,9,40832,sop/SOP-OPS-002.docx
+SOP-OPS-003,sop,Early Settlement Processing,docx,en,1.0,2026-01-01,internal,6,8,40196,sop/SOP-OPS-003.docx
+SOP-OPS-004,sop,Lost and Stolen Card Handling,docx,en,1.0,2026-01-01,internal,6,8,40064,sop/SOP-OPS-004.docx
+SOP-OPS-005,sop,Credit Limit Increase Review,docx,en,1.0,2026-01-01,internal,6,8,40399,sop/SOP-OPS-005.docx
+COL-001,collections,Collections Strategy by Arrears Bucket,docx,en,1.0,2026-01-01,internal,6,9,41120,collections/COL-001.docx
+COL-002,collections,Collections Call Script and AKPK Referral,docx,en,1.0,2026-01-01,internal,6,8,41041,collections/COL-002.docx
+COL-003,collections,Repossession Procedure for Hire Purchase-i,pdf,en,1.0,2026-01-01,internal,6,9,7688,collections/COL-003.pdf
+CMP-001,compliance,AML/CFT and Targeted Financial Sanctions Procedure,pdf,en,1.0,2026-01-01,internal,6,8,7930,compliance/CMP-001.pdf
+CMP-002,compliance,Personal Data Protection Handling Procedure,pdf,en,1.0,2026-01-01,internal,6,9,8200,compliance/CMP-002.pdf
+CMP-003,compliance,Complaints Handling Procedure,pdf,en,1.0,2026-01-01,internal,6,9,6722,compliance/CMP-003.pdf
+CMP-004,compliance,Fraud Typologies and Red Flags,pdf,en,1.0,2026-01-01,internal,6,8,8618,compliance/CMP-004.pdf
+FAQ-CARD-EN,faq,Credit Card FAQ,html,en,1.0,2026-01-01,public,5,13,8645,faq/FAQ-CARD-EN.html
+FAQ-PF-EN,faq,Personal Financing-i FAQ,html,en,1.0,2026-01-01,public,5,16,10905,faq/FAQ-PF-EN.html
+FAQ-HP-EN,faq,Motorcycle and Auto Hire Purchase-i FAQ,csv,en,1.0,2026-01-01,public,5,16,7600,faq/FAQ-HP-EN.csv
+FAQ-CARD-MS,faq,Soalan Lazim Kad Kredit,html,ms,1.0,2026-01-01,public,5,16,8881,faq/FAQ-CARD-MS.html
+PDS-MHP-I-MS,product,Lembaran Penzahiran Produk: Sewa Beli-i Motosikal,pdf,ms,1.0,2026-01-01,public,5,9,6440,product/PDS-MHP-I-MS.pdf
+CIR-MS-01,circular,Pekeliling: Prosedur Aduan Pelanggan di Cawangan,pdf,ms,1.0,2026-05-12,internal,5,8,6138,circular/CIR-MS-01.pdf
+FORM-001,form,Credit Card Application Form (filled sample),scan,en,1.0,2026-01-01,internal,4,8,188529,form/FORM-001.pdf
+FORM-002,form,Income Declaration Form for Self-Employed Applicants (filled sample),scan,en,1.0,2026-01-01,internal,4,8,187450,form/FORM-002.pdf
+FORM-003,form,Direct Debit Authorisation Form (filled sample),scan,en,1.0,2026-01-01,internal,4,8,185788,form/FORM-003.pdf
+FORM-004,form,Dependants Declaration Form,scan,en,1.0,2026-01-01,internal,4,8,188659,form/FORM-004.pdf
+FORM-005,form,Branch Exception Approval Slip (filled sample),scan,en,1.0,2026-01-01,internal,4,7,173109,form/FORM-005.pdf
