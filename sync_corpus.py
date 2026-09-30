@@ -1,4 +1,8 @@
-"""Instructor-only idempotent RAG ingestion and corpus-vs-bucket delete sync.
+"""Instructor-only idempotent RAG ingestion: local policy files -> GCS -> BigQuery.
+
+Every run leaves the same end state: `raw/` in the bucket matches manifest.csv
+(stale objects are deleted), policy_chunks is reloaded with WRITE_TRUNCATE and
+the audit table is recreated.
 
 Usage:
   uv run python sync_corpus.py --project <project-id> [--corpus-dir ./corpus]
@@ -16,16 +20,10 @@ from pathlib import Path
 from google import genai
 from google.cloud import bigquery, storage
 from google.genai import types
-import vertexai
-from vertexai.preview import rag
 
 EMBED_MODEL = "gemini-embedding-001"
 EMBED_DIM = 768
-CORPUS_DISPLAY_NAME = "acsm-credit-policy-corpus"
-CORPUS_DESCRIPTION = (
-    "AEON Credit Service Malaysia (ACSM) Credit Policy, Product Disclosure "
-    "Sheets, BNM Compliance, Collections SOPs, and Circulars."
-)
+RAW_PREFIX = "raw/"
 
 MIME_MAP = {
     ".pdf": "application/pdf",
@@ -43,7 +41,8 @@ def sync_bucket(
     bucket_name: str,
     region: str,
     corpus_dir: Path,
-) -> dict[str, dict]:
+) -> int:
+    """Upload every manifest file to raw/ and delete raw/ objects no longer in the manifest."""
     bucket = storage_client.bucket(bucket_name)
     if not bucket.exists():
         bucket = storage_client.create_bucket(bucket_name, location=region)
@@ -51,50 +50,24 @@ def sync_bucket(
         bucket.patch()
 
     manifest_rows = list(csv.DictReader((corpus_dir / "manifest.csv").open("r", encoding="utf-8")))
-    chunks_by_doc: dict[str, list[dict]] = {}
-    for line in (corpus_dir / "chunks.jsonl").read_text(encoding="utf-8").splitlines():
-        if line.strip():
-            row = json.loads(line)
-            chunks_by_doc.setdefault(row["doc_id"], []).append(row)
-
-    doc_map: dict[str, dict] = {}
+    desired: set[str] = set()
     for row in manifest_rows:
-        doc_id = row["doc_id"]
         rel_path = row["file_path"]
         local_file = corpus_dir / rel_path
         ext = local_file.suffix.lower()
         content_type = MIME_MAP.get(ext) or mimetypes.guess_type(local_file.name)[0] or "application/octet-stream"
 
-        raw_blob = bucket.blob(f"raw/{rel_path}")
+        blob_name = f"{RAW_PREFIX}{rel_path}"
+        raw_blob = bucket.blob(blob_name)
+        # Inline disposition so #page=N citation links open in the browser.
         raw_blob.content_disposition = "inline"
         raw_blob.upload_from_filename(str(local_file), content_type=content_type)
+        desired.add(blob_name)
 
-        if row["format"] in ("pdf", "docx", "html"):
-            rag_rel_path = rel_path
-            bucket.blob(f"rag-engine/{rag_rel_path}").upload_from_filename(str(local_file), content_type=content_type)
-        else:
-            rag_rel_path = str(Path(rel_path).with_suffix(".md"))
-            md_lines = [
-                f"# {row['title']} ({doc_id})",
-                f"- **Document ID:** {doc_id}",
-                f"- **Version:** {row['version']}",
-                f"- **Effective Date:** {row['effective_date']}",
-                f"- **Access Level:** {row['access']}",
-                "",
-            ]
-            for ch in chunks_by_doc.get(doc_id, []):
-                md_lines.extend([f"## Clause {ch['clause_id']} — {ch['heading']}", ch["chunk_text"], ""])
-            bucket.blob(f"rag-engine/{rag_rel_path}").upload_from_string(
-                "\n".join(md_lines), content_type="text/markdown; charset=utf-8"
-            )
-
-        doc_map[doc_id] = {
-            "doc_id": doc_id,
-            "raw_file_path": rel_path,
-            "rag_file_path": rag_rel_path,
-            "gcs_rag_uri": f"gs://{bucket_name}/rag-engine/{rag_rel_path}",
-        }
-    return doc_map
+    for blob in storage_client.list_blobs(bucket_name, prefix=RAW_PREFIX):
+        if blob.name not in desired:
+            blob.delete()
+    return len(desired)
 
 
 def sync_bigquery(project: str, region: str, dataset: str, corpus_dir: Path) -> None:
@@ -159,44 +132,6 @@ def sync_bigquery(project: str, region: str, dataset: str, corpus_dir: Path) -> 
     bq.query(ddl_audit).result()
 
 
-def sync_rag_engine(project: str, region: str, doc_map: dict[str, dict]) -> str:
-    vertexai.init(project=project, location=region)
-    existing = [c for c in rag.list_corpora() if c.display_name == CORPUS_DISPLAY_NAME]
-    if existing:
-        corpus = existing[0]
-    else:
-        embedding_cfg = rag.RagEmbeddingModelConfig(
-            vertex_prediction_endpoint=rag.VertexPredictionEndpoint(
-                publisher_model=f"publishers/google/models/{EMBED_MODEL}"
-            )
-        )
-        corpus = rag.create_corpus(
-            display_name=CORPUS_DISPLAY_NAME,
-            description=CORPUS_DESCRIPTION,
-            backend_config=rag.RagVectorDbConfig(rag_embedding_model_config=embedding_cfg),
-        )
-
-    desired_uris = sorted({info["gcs_rag_uri"] for info in doc_map.values()})
-    desired_names = {Path(u).name for u in desired_uris}
-
-    # Delete any RagFiles whose source object was removed from the desired set.
-    for rf in rag.list_files(corpus_name=corpus.name):
-        if rf.display_name not in desired_names:
-            rag.delete_file(name=rf.name, corpus_name=corpus.name)
-
-    # Import in batches of 20 (RAG Engine skips unchanged files and updates changed files in place).
-    for i in range(0, len(desired_uris), 20):
-        rag.import_files(
-            corpus_name=corpus.name,
-            paths=desired_uris[i : i + 20],
-            transformation_config=rag.TransformationConfig(
-                chunking_config=rag.ChunkingConfig(chunk_size=512, chunk_overlap=100)
-            ),
-            max_embedding_requests_per_min=900,
-        )
-    return corpus.name
-
-
 def _default_project() -> str:
     for name in ("ACSM_PROJECT", "PROJECT", "GOOGLE_CLOUD_PROJECT"):
         val = os.environ.get(name, "").strip()
@@ -230,11 +165,11 @@ def main() -> None:
     corpus_dir = Path(args.corpus_dir).resolve()
     bucket_name = f"{args.project}-acsm-rag-corpus"
     storage_client = storage.Client(project=args.project)
-    doc_map = sync_bucket(storage_client, bucket_name, args.region, corpus_dir)
+    file_count = sync_bucket(storage_client, bucket_name, args.region, corpus_dir)
     sync_bigquery(args.project, args.region, args.dataset, corpus_dir)
-    corpus_name = sync_rag_engine(args.project, args.region, doc_map)
+    print(f"Synced {file_count} files to gs://{bucket_name}/{RAW_PREFIX}")
     print(f"RAG_BUCKET={bucket_name}")
-    print(f"RAG_CORPUS={corpus_name}")
+    print(f"RAG_TABLE={args.project}.{args.dataset}.policy_chunks")
 
 
 if __name__ == "__main__":
