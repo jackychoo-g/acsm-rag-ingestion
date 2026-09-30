@@ -197,15 +197,35 @@ def sync_rag_engine(project: str, region: str, doc_map: dict[str, dict]) -> str:
     return corpus.name
 
 
+def _default_project() -> str:
+    for name in ("ACSM_PROJECT", "PROJECT", "GOOGLE_CLOUD_PROJECT"):
+        val = os.environ.get(name, "").strip()
+        if val and not val.isdigit():
+            return val
+    try:
+        import subprocess
+        val = subprocess.check_output(
+            ["gcloud", "config", "get-value", "project"],
+            stderr=subprocess.DEVNULL,
+            text=True,
+            timeout=5,
+        ).strip()
+        if val and val != "(unset)" and not val.isdigit():
+            return val
+    except Exception:
+        pass
+    return ""
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--project", default=os.environ.get("ACSM_PROJECT", ""))
+    parser.add_argument("--project", default=_default_project())
     parser.add_argument("--region", default=os.environ.get("ACSM_REGION", "asia-southeast1"))
     parser.add_argument("--dataset", default=os.environ.get("ACSM_RAG_DATASET", "acsm_rag"))
     parser.add_argument("--corpus-dir", default="corpus")
     args = parser.parse_args()
     if not args.project:
-        raise SystemExit("Pass --project <project-id> or set ACSM_PROJECT.")
+        raise SystemExit("Pass --project <project-id> or run `gcloud config set project <project-id>`.")
 
     corpus_dir = Path(args.corpus_dir).resolve()
     bucket_name = f"{args.project}-acsm-rag-corpus"
